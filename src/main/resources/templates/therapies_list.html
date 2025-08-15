@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista terapii</title>
+</head>
+<body>
+
+<!-- Włączenie nagłówka -->
+<div th:replace="header :: header"></div>
+
+<h1>Lista terapii</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>Opis</th>
+        <th>Akcje</th>
+    </tr>
+    <tr th:each="therapy : ${therapies}">
+        <td th:text="${therapy.id}">ID</td>
+        <td th:text="${therapy.name}">Nazwa</td>
+        <td th:text="${therapy.description}">Opis</td>
+        <td>
+            <!-- Link do edycji terapii -->
+            <a th:href="@{/therapies/edit/{id}(id=${therapy.id})}">Edytuj</a>
+
+            <!-- Link do usunięcia terapii -->
+            <a th:href="@{/therapies/delete/{id}(id=${therapy.id})}"
+               onclick="return confirm('Czy na pewno chcesz usunąć tę terapię?')">Usuń</a>
+
+        </td>
+    </tr>
+</table>
+<a href="/therapies/add">Dodaj nową terapię</a>
+</body>
+</html>

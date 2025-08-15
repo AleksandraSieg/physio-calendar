@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista wizyt</title>
+</head>
+<body>
+
+<!-- Włączenie nagłówka -->
+<div th:replace="header :: header"></div>
+
+<h1>Lista wizyt na dzień <span th:text="${date}">Data</span></h1>
+<table>
+    <tr>
+        <th>Numer</th>
+        <th>Pacjent</th>
+        <th>Terapia</th>
+        <th>Akcje</th> <!-- Kolumna dla akcji -->
+    </tr>
+    <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.appointmentNumber}">Nr</td>
+        <td th:text="${appointment.patient.firstName} + ' ' + ${appointment.patient.lastName}">Pacjent</td>
+        <td th:text="${appointment.therapy.name}">Terapia</td>
+        <td>
+            <!-- Przycisk edycji -->
+            <a th:href="@{/appointments/edit/{id}(id=${appointment.id})}">Edytuj</a>
+            <!-- Przycisk usuwania z potwierdzeniem -->
+            <a th:href="@{/appointments/delete/{id}(id=${appointment.id})}"
+               onclick="return confirm('Czy na pewno chcesz usunąć tę wizytę?')">Usuń</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dodaj terapię</title>
+</head>
+<body>
+
+<!-- Włączenie nagłówka -->
+<div th:replace="header :: header"></div>
+
+<h1>Dodaj nową terapię</h1>
+<form action="#" th:action="@{/therapies/add}" th:object="${therapy}" method="post">
+    <label>Nazwa:</label>
+    <input type="text" th:field="*{name}" required/>
+    <br/>
+    <label>Opis:</label>
+    <textarea th:field="*{description}" required></textarea>
+    <br/>
+    <button type="submit">Dodaj terapię</button>
+</form>
+</body>
+</html>

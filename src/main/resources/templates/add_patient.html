@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Patient</title>
+</head>
+<body>
+
+<!-- Włączenie nagłówka -->
+<div th:replace="header :: header"></div>
+
+<h1>Add Patient</h1>
+<form action="#" th:action="@{/patients/add}" th:object="${patient}" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" th:field="*{firstName}" required />
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" th:field="*{lastName}" required />
+
+    <label for="birthDate">Birth Date:</label>
+    <input type="date" th:field="*{birthDate}" required />
+
+    <label for="problemDescription">Problem Description:</label>
+    <textarea th:field="*{problemDescription}" required></textarea>
+
+    <button type="submit">Add Patient</button>
+</form>
+</body>
+</html>

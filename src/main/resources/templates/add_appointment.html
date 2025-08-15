@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dodaj Wizytę</title>
+</head>
+<body>
+
+<!-- Włączenie nagłówka -->
+<div th:replace="header :: header"></div>
+
+<h2>Dodaj wizytę</h2>
+
+<form action="/appointments/add" method="post">
+    <label for="patientId">Pacjent:</label>
+    <select name="patientId" id="patientId">
+        <!-- Iterujemy przez listę pacjentów i wyświetlamy ich jako opcje -->
+        <option th:each="patient : ${patients}"
+                th:value="${patient.id}"
+                th:text="${patient.firstName + ' ' + patient.lastName}">
+        </option>
+    </select>
+
+    <label for="therapyId">Terapia:</label>
+    <select name="therapyId" id="therapyId">
+        <!-- Iterujemy przez listę terapii i wyświetlamy je jako opcje -->
+        <option th:each="therapy : ${therapies}"
+                th:value="${therapy.id}"
+                th:text="${therapy.name}">
+        </option>
+    </select>
+
+    <label for="appointmentDate">Data wizyty:</label>
+    <input type="date" name="appointmentDate" id="appointmentDate" required>
+
+    <button type="submit">Dodaj wizytę</button>
+</form>
+
+</body>
+</html>

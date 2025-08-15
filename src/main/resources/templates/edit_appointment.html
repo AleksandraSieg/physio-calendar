@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edytuj wizytę</title>
+</head>
+<body>
+
+<h1>Edytuj wizytę</h1>
+
+<form th:action="@{/appointments/update/{id}(id=${appointment.id})}" method="post">
+    <div>
+        <label>Numer wizyty:</label>
+        <span th:text="${appointment.appointmentNumber}">Nr</span>
+    </div>
+    <div>
+        <label>Pacjent:</label>
+        <select name="patientId">
+            <option th:each="patient : ${patients}"
+                    th:value="${patient.id}"
+                    th:text="${patient.firstName} + ' ' + ${patient.lastName}"
+                    th:selected="${appointment.patient.id == patient.id}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <label>Terapia:</label>
+        <select name="therapyId">
+            <option th:each="therapy : ${therapies}"
+                    th:value="${therapy.id}"
+                    th:text="${therapy.name}"
+                    th:selected="${appointment.therapy.id == therapy.id}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <label>Data wizyty:</label>
+        <input type="date" name="appointmentDate" th:value="${appointment.date}" />
+    </div>
+    <button type="submit">Zapisz zmiany</button>
+</form>
+
+</body>
+</html>

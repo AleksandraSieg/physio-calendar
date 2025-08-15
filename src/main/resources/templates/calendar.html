@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wizyty na wybrany dzień</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<h1>Wizyty na <span th:text="${date}">wybraną datę</span></h1>
+
+<!-- Pole do wyboru nowej daty -->
+<h2>Wybierz nową datę:</h2>
+<input type="text" id="datePicker" placeholder="Wybierz datę" readonly>
+
+<!-- Lista pacjentów i terapii dla wybranej daty -->
+<div>
+    <h2>Lista wizyt</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Numer wizyty</th>
+            <th>Pacjent</th>
+            <th>Terapia</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.appointmentNumber}">1</td>
+            <td th:text="${appointment.patient.name}">Imię Pacjenta</td>
+            <td th:text="${appointment.therapy.name}">Nazwa Terapii</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Skrypt do wybrania nowej daty, który przekierowuje na stronę z listą wizyt -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr("#datePicker", {
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+            onChange: function(selectedDates, dateStr, instance) {
+                if (dateStr) {
+                    window.location.href = "/appointments?date=" + dateStr;
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

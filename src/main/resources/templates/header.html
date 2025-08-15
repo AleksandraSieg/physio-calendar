@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="header">
+    <nav>
+        <a th:href="@{/patients/list}">Lista Pacjentów</a> |
+        <a th:href="@{/therapies}">Lista Terapii</a> |
+        <a th:href="@{/appointments/calendar}">Kalendarz</a> |
+        <a th:href="@{/appointments/add}">Zaplanuj wizytę pacjentów</a>
+    </nav>
+</div>
+</body>
+</html>
